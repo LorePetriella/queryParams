@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16x16.png"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>ADAComics</title>
+  </head>
+  <body id="body" class="principal">
+    <div id="presentation-container">
+      <div class="wrapper run-animation" id="animate">
+        <div class="row">
+          <div id="logo" class="logo">
+            <span class="name">ada</span>
+            <span class="surname">comics</span>
+          </div>
+          <button
+            id="enter-btn"
+            type="button"
+            class="btn btn-outline-light fw-semibold"
+          >
+            Entrar
+          </button>
+        </div>
+      </div>
+      <div class="images"></div>
+    </div>
+    <!-- ******************************************
+                     HEADER - BANNER
+    ********************************************* -->
+    <header class="header">
+      <div class="banner">
+        <div class="titulo">
+          <h1>
+            <span class="ada">ADA</span> <span class="comics">COMICS</span>
+          </h1>
+        </div>
+      </div>
+    </header>
+    <!-- ******************************************
+                  SECCIÓN PRINCIPAL
+    ********************************************* -->
+    <main class="main">
+      <div class="container d-flex flex-column justify-content-center">
+        <!-- ******************************************
+                  MENÚ DE NAVEGACIÓN
+      ********************************************* -->
+        <nav class="margen-inferior-nav">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="fw-bold">Búsqueda</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
+              <div class="input-group mb-3 align-self-center">
+                <span
+                  class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
+                  id="basic-addon3"
+                  ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control border-0 border-bottom rounded-0 border-2 border-dark fs-5 estilo-focus"
+                  id="input-search"
+                  aria-describedby="input-search"
+                  placeholder="Ingresa tu búsqueda"
+                />
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="row d-flex flex-row justify-content-start">
+                <div
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho"
+                >
+                  <label
+                    for="select-tipo"
+                    class="fw-bold text-secondary margen-derecho"
+                    >TIPO</label
+                  >
+                  <select
+                    id="select-tipo"
+                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                  >
+                    <option value="comics">COMICS</option>
+                    <option value="characters">PERSONAJES</option>
+                  </select>
+                </div>
+                <div
+                  id="div-select-comics"
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center"
+                >
+                  <label
+                    for="select-order-comics"
+                    class="fw-bold text-secondary margen-derecho"
+                    >ORDEN</label
+                  >
+                  <select
+                    id="select-order-comics"
+                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                  >
+                    <option value="title">A-Z</option>
+                    <option value="-title">Z-A</option>
+                    <option value="-onsaleDate">Más nuevos</option>
+                    <option value="onsaleDate">Más viejos</option>
+                  </select>
+                </div>
+                <div
+                  id="div-select-character"
+                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center d-none"
+                >
+                  <label
+                    for="select-order-characters"
+                    class="fw-bold text-secondary margen-derecho"
+                    >ORDEN</label
+                  >
+                  <select
+                    id="select-order-characters"
+                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                  >
+                    <option value="name">A-Z</option>
+                    <option value="-name">Z-A</option>
+                  </select>
+                </div>
+                <div
+                  class="col-12 col-sm-1 col-lg-1 d-flex flex-row align-items-center box-btn-buscar"
+                >
+                  <button
+                    id="btn-search"
+                    type="button"
+                    class="btn btn-dark rounded-1 box-btn-buscar"
+                  >
+                    BUSCAR
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- ******************************************
+                  SECCIÓN COMICS
+    ********************************************* -->
+        <section id="section-comics" class="d-none">
+          <img src="" alt="" class="comic-cover" />
+          <div class="info-comic">
+            <h4 class="fw-bold comic-title"></h4>
+            <h5 class="fw-bold">Publicado:</h5>
+            <p class="comic-release-date"></p>
+            <h5 class="fw-bold">Guionistas:</h5>
+            <p class="comic-writers"></p>
+            <h5 class="fw-bold">Descripción:</h5>
+            <p class="comic-description"></p>
+          </div>
+        </section>
+        <!-- ******************************************
+                  SECCIÓN PERSONAJES
+    ********************************************* -->
+        <section id="section-personajes" class="d-none">
+          <img class="retrato-personaje character-img" src="" alt="" />
+          <div class="info-personaje">
+            <h4 class="fw-bold character-name"></h4>
+            <p class="character-description"></p>
+          </div>
+        </section>
+        <!-- ******************************************
+                  SECCIÓN RESULTADOS
+    ********************************************* -->
+        <section>
+          <div class="d-flex flex-column justify-content-center">
+            <div class="resultados-info">
+              <h4 class="fw-bold" id="results-title">Resultados</h4>
+              <div id="results-counter" class="fs-6 text-secondary fw-bold">
+                <p class="results-count">
+                  <span class="results-number">0</span> RESULTADOS
+                </p>
+              </div>
+              <div id="card-group" class="cards"></div>
+            </div>
+          </div>
+        </section>
+        <!-- ******************************************
+                     LOADER
+    ********************************************* -->
+        <div class="loader-container">
+          <img
+            src="./assets/icons/Hammer.png"
+            class="ld ld-flip-h thor"
+            alt=""
+          />
+        </div>
+        <!-- ******************************************
+                  PAGINADOR
+    ********************************************* -->
+        <div class="container-paginador d-flex justify-content-center">
+          <p class="fw-bold">
+            Página <span id="current-page"></span> de
+            <span id="total-pages"></span>
+          </p>
+        </div>
+        <div class="pagination">
+          <button
+            id="first"
+            type="button"
+            class="first-page pagination-button"
+            aria-label="Página previa"
+            disabled=""
+          >
+            <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+          </button>
+          <button
+            id="previous"
+            type="button"
+            class="previous-page pagination-button"
+            aria-label="Página Anterior"
+            disabled=""
+          >
+            <i class="fas fa-angle-left" aria-hidden="true"></i>
+          </button>
+          <button
+            id="next"
+            type="button"
+            class="next-page pagination-button"
+            aria-label="Siguiente Página"
+          >
+            <i class="fas fa-angle-right" aria-hidden="true"></i>
+          </button>
+          <button
+            id="last"
+            type="button"
+            class="last-page pagination-button"
+            aria-label="Última página"
+          >
+            <i class="fas fa-angle-double-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+    <!-- ******************************************
+                       FOOTER
+    ********************************************* -->
+    <footer id="footer" class="page-footer footer-bg">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <div class="container">
+            <div class="row d-flex justify-content-between">
+              <div class="col-12">
+                <section
+                  id="contact-lore"
+                  class="d-flex justify-content-evenly"
+                >
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://github.com/LorePetriella"
+                    target="_blank"
+                    data-message="Enlace a GitHub"
+                  >
+                    <i
+                      id="lore-github"
+                      class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://www.linkedin.com/in/lorepetriella/"
+                    target="_blank"
+                    data-message="Enlace a Linkedin"
+                  >
+                    <i
+                      id="lore-linkedin"
+                      class="fa-brands fa-linkedin fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </section>
+              </div>
+              <div class="col-12">
+                <section
+                  id="contact-stefa"
+                  class="d-flex justify-content-evenly"
+                >
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href="https://github.com/StefaniaDiazV"
+                    target="_blank"
+                    data-message="Enlace a GitHub"
+                  >
+                    <i
+                      id="stefa-github"
+                      class="fa-brands fa-github fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                  <a
+                    class="text-lighten-4 right text-light"
+                    href=""
+                    target="_blank"
+                    data-message="Enlace a Linkedin"
+                  >
+                    <i
+                      id="stefa-linkedin"
+                      class="fa-brands fa-linkedin fa-2xl line-height-icon text-light"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid justify-content-evenly">
+          <button
+            id="lore"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="text-light">Lore Petriella</span>
+          </button>
+          <span class="text-light">© 2022 Copyright</span>
+          <button
+            id="stefa"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="text-light">Stefanía Diaz</span>
+          </button>
+        </div>
+      </nav>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/4943010bed.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <!-- custom-js -->
+    <script src="./main.js"></script>
+  </body>
+</html>

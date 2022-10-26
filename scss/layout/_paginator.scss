@@ -1,0 +1,18 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.pagination-button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  &:disabled {
+    color: #757575;
+    border-color: #757575;
+  }
+}

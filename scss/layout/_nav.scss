@@ -1,0 +1,23 @@
+.margen-derecho{
+    margin-right: 10px;
+}
+
+.estilo-focus{
+    width: auto;
+    &:focus{
+    border-color: rgb(141, 140, 140);
+    box-shadow: 0 0 0 0.2rem rgba(16, 15, 15, 0.25);
+    }
+}
+
+.margen-inferior-nav{
+    margin-bottom: 4rem;
+}
+
+.box-btn-buscar{
+    margin-left: 5px;
+    @include responsive(medium){
+        width: 100%;
+        margin-left: 0;
+    }
+}

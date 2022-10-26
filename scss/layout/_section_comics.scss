@@ -1,0 +1,23 @@
+#section-comics {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3.5rem ;
+  .comic-portada {
+    max-width: 22rem;
+  }
+  .info-comic {
+    margin-left: 1%;
+    @include responsive(medium) {
+      margin-top:3rem;
+      margin-left: 0;
+    }
+  }
+  @include responsive(medium) {
+    flex-direction: column;
+  }
+}
+
+.comic-cover {
+  max-width: 350px;
+  margin-right: 50px;
+}

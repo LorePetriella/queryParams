@@ -1,0 +1,23 @@
+{
+  "name": "ada-comics-queryparams",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch scss/style.scss css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LorePetriella/ada-comics-new-URLSearchParams.git"
+  },
+  "author": "Stefanía Diaz and Lore Petriella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LorePetriella/ada-comics-new-URLSearchParams/issues"
+  },
+  "homepage": "https://github.com/LorePetriella/ada-comics-new-URLSearchParams#readme",
+  "dependencies": {
+    "sass": "^1.55.0"
+  }
+}
