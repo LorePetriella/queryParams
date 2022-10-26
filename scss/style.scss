@@ -2,16 +2,16 @@
 @import "./utilities/keyframes";
 @import "./utilities/mixins";
 @import "./layout/banner-header";
-@import "./layout/nav";
-@import "./layout/section_comics";
-@import "./layout/section-personajes";
-@import "./layout/section-results";
 @import "./layout/footer";
-@import "./layout/logo";
-@import "./layout/paginator";
-@import "./layout/cards";
-@import "./layout/responsive";
 @import "./layout/loader";
+@import "./layout/logo";
+@import "./layout/nav";
+@import "./layout/paginator";
+@import "./layout/responsive";
+@import "./pages/section_comics";
+@import "./pages/section-personajes";
+@import "./pages/section-results";
+@import "./components/cards";
 @import "./themes/default";
 
 * {
