@@ -31,25 +31,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <title>ADAComics</title>
   </head>
-  <body id="body" class="principal">
-    <div id="presentation-container">
-      <div class="wrapper run-animation" id="animate">
-        <div class="row">
-          <div id="logo" class="logo">
-            <span class="name">ada</span>
-            <span class="surname">comics</span>
-          </div>
-          <button
-            id="enter-btn"
-            type="button"
-            class="btn btn-outline-light fw-semibold"
-          >
-            Entrar
-          </button>
-        </div>
-      </div>
-      <div class="images"></div>
-    </div>
+  <body class="principal">
     <!-- ******************************************
                      HEADER - BANNER
     ********************************************* -->
@@ -126,7 +108,7 @@
                   >
                     <option value="title">A-Z</option>
                     <option value="-title">Z-A</option>
-                    <option value="-onsaleDate">Más nuevos</option>
+                    <option value="-focDate">Más nuevos</option>
                     <option value="onsaleDate">Más viejos</option>
                   </select>
                 </div>
@@ -206,13 +188,13 @@
         <!-- ******************************************
                      LOADER
     ********************************************* -->
-        <div class="loader-container">
+        <!-- <div class="loader-container">
           <img
             src="../assets/icons/Hammer.png"
             class="ld ld-flip-h thor"
             alt=""
           />
-        </div>
+        </div> -->
         <!-- ******************************************
                   PAGINADOR
     ********************************************* -->
@@ -380,8 +362,9 @@
       crossorigin="anonymous"
     ></script>
     <!-- custom-js -->
-    <script src="../js/main.js"></script>
+
     <script src="../api/comics.js"></script>
     <script src="../api/characters.js"></script>
+    <script src="../process/main.js"></script>
   </body>
 </html>
