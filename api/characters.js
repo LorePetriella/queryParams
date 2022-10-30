@@ -1,6 +1,6 @@
-const getCharacters = async (offset, orderBy) => {
+const getCharacters = async (orderBy, offset) => {
   const response = await fetch(
-    `${baseUrl}characters?apikey=${publicKey}&offset=${offset}&orderBy=${orderBy}`
+    `${baseUrl}characters?orderBy=${orderBy}&offset=${offset}&apikey=${publicKey}`
   );
 
   const data = await response.json();

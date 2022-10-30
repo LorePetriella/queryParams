@@ -135,24 +135,23 @@ const OrderResults = () => {
   const params = new URLSearchParams(window.location.search);
 
   params.set("offset", 0);
-  params.set("type", type);
+
   window.location.href = window.location.pathname + "?" + params.toString();
 
   if (type === "comics") {
     params.set("order", comicOrderBy);
+    params.set("type", type);
     window.location.href = window.location.pathname + "?" + params.toString();
-    //   return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
   } else if (type === "characters") {
     const params = new URLSearchParams(window.location.search);
 
     params.set("order", characterOrderBy);
+    params.set("type", type);
     window.location.href = window.location.pathname + "?" + params.toString();
-    //   return `${inputSearch.value ? "&" : "?"}orderBy=${
-    //     selectOrderCharacters.value
-    //   }`;
-  } else {
-    return "";
   }
+  // else {
+  //   return "";
+  // }
 };
 
 //Retorna última parte de la URL-------------------------------------------------------------
@@ -216,7 +215,7 @@ const updateResultsCounter = (count, title) => {
 // };
 
 const fetchComic = async (comicId) => {
-  showLoader();
+  // showLoader();
   const {
     data: {
       results: [comic],
@@ -246,7 +245,7 @@ const fetchComic = async (comicId) => {
 };
 
 const fetchComicCharacters = async (comicId) => {
-  showLoader();
+  // showLoader();
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics", comicId, "characters"));
@@ -330,7 +329,7 @@ const showCards = () => {
 // };
 
 const fetchCharacter = async (characterId) => {
-  showLoader();
+  // showLoader();
   const {
     data: {
       results: [character],
@@ -383,10 +382,12 @@ btnSearch.addEventListener("click", () => {
   // hideComicDetail();
   // hideCharacterDetails();
   clearResults();
-  clearPageCount();
+  // clearPageCount();
   search();
-  showCards();
-  updatePaginationCallback(search);
+  // showCards();
+  // updatePaginationCallback(search);
+  // loadComics();
+  // loadCharacters();
 });
 
 //PAGINATOR
@@ -433,7 +434,8 @@ const updatePaginationData = (totalResults) => {
 };
 
 const updatePagination = () => {
-  if (offSet === 0) {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("offset") === 0) {
     firstPage.disabled = true;
     previousPage.disabled = true;
   } else {
@@ -441,7 +443,7 @@ const updatePagination = () => {
     previousPage.disabled = false;
   }
 
-  if (offSet + 20 >= resultsCount) {
+  if (params.get("offset") + 20 >= resultsCount) {
     lastPage.disabled = true;
     nextPage.disabled = true;
   } else {
@@ -450,23 +452,52 @@ const updatePagination = () => {
   }
 };
 
-// const inicio = () => {
-//   search();
-//   updatePaginationCallback(search);
-//   getApiUrl();
-//   updatePagination();
-// };
-
 //-------------------------------------------------------------------------------------------------------------------------
 
-// const getParams = () => {
+// /**
+//  *
+//  */
+// const formSearch = document.getElementById("search-comics");
 
-//   return params;
+// formSearch.addEventListener("submit", (e) => {
+//   e.preventDefault();
 
+//   const orderBy = e.target["control-order-by"].value;
+
+//   const params = new URLSearchParams(window.location.search);
+
+//   params.set("order", orderBy);
+//   params.set("offset", 20);
+
+//   window.location.href = window.location.pathname + "?" + params.toString();
+// });
+
+// const loadDetail = (comic) => {
+//   const comicDetail = document.getElementById("comic-detail");
+
+//   comicDetail.classList.remove("d-none");
+
+//   const title = document.createElement("h3");
+//   const text = document.createTextNode(comic.title);
+//   const div = document.createElement("div");
+
+//   title.appendChild(text);
+
+//   div.appendChild(document.createTextNode(comic.description));
+
+//   comicDetail.appendChild(title);
+//   comicDetail.appendChild(div);
+// };
+
+// const params = new URLSearchParams(window.location.search);
+
+// console.log(params.get("comicId"));
+
+// const loadComic = async () => {
+//   const response = await fetch(""); // Buscar por id - devuelve un solo comic
 // };
 
 const loadComics = async () => {
-  clearResults();
   const params = new URLSearchParams(window.location.search);
 
   const comicsResponse = await getComics(
@@ -520,22 +551,20 @@ const loadComics = async () => {
     cardGroup.appendChild(comicCard);
   });
 };
-
-loadComics();
-
 const loadCharacters = async () => {
   clearResults();
   const params = new URLSearchParams(window.location.search);
 
   const charactersResponse = await getCharacters(
-    params.get("offset") || 0,
-    params.get("order") || "name"
+    params.get("order") || "name",
+    params.get("offset") || 0
   );
 
   const data = charactersResponse.data;
+  // console.log("porque");
 
   const characters = data.results;
-  console.log(data);
+  // console.log(data);
 
   if (characters.length === 0) {
     cardGroup.innerHTML =
@@ -556,131 +585,37 @@ const loadCharacters = async () => {
       // updatePaginationCallback(() => fetchCharacterComics(character.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
-  <div class="card card-personaje">
-    <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
-    <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
-      <p class="card-text">${character.name}</p>
+    <div class="card card-personaje">
+      <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
+      <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
+        <p class="card-text">${character.name}</p>
+      </div>
     </div>
-  </div>
-</div> `;
+  </div> `;
 
     cardGroup.append(characterCard);
   });
 };
-loadCharacters();
-// const loadComics = async () => {
-//   const params = new URLSearchParams(window.location.search);
 
-//   const comicsRsponse = await getComics(
-//     params.get("offset") || 0,
-//     params.get("order") || "title"
-//   );
-
-//   const data = comicsRsponse.data;
-//   const comics = data.results;
-
-//   comics.forEach((comic) => {
-//     const card = document.createElement("div");
-//     const cardImg = document.createElement("img");
-//     const cardBody = document.createElement("div");
-//     const col = document.createElement("div");
-//     const title = document.createElement("h2");
-
-//     card.addEventListener("click", () => {
-//       params.set("comicId", comic.id);
-
-//       window.location.href =
-//         window.location.pathname + "/../detail.html?" + params.toString();
-//     });
-
-//     backButton.addEventListener("click", () => {
-//       results.classList.remove("d-none");
-//       backButton.classList.add("d-none");
-//     });
-
-//     const titleText = document.createTextNode(comic.title);
-
-//     card.appendChild(cardImg);
-//     card.appendChild(cardBody);
-//     col.appendChild(card);
-//     cardBody.appendChild(title);
-//     title.appendChild(titleText);
-
-//     card.classList.add("card");
-//     cardImg.classList.add("card-img-top");
-//     cardBody.classList.add("card-body");
-//     col.classList.add("col-md-3");
-//     title.classList.add("h5");
-
-//     row.appendChild(col);
-
-//     cardImg.setAttribute(
-//       "src",
-//       `${comic.thumbnail.path}.${comic.thumbnail.extension}`
-//     );
-//   });
-// };
-
-// const init = () => {
-//   loadComics();
-// };
-
-// init();
-
-// /**
-//  *
-//  */
-// const formSearch = document.getElementById("search-comics");
-
-// formSearch.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   const orderBy = e.target["control-order-by"].value;
-
-//   const params = new URLSearchParams(window.location.search);
-
-//   params.set("order", orderBy);
-//   params.set("offset", 20);
-
-//   window.location.href = window.location.pathname + "?" + params.toString();
-// });
-
-// const loadDetail = (comic) => {
-//   const comicDetail = document.getElementById("comic-detail");
-
-//   comicDetail.classList.remove("d-none");
-
-//   const title = document.createElement("h3");
-//   const text = document.createTextNode(comic.title);
-//   const div = document.createElement("div");
-
-//   title.appendChild(text);
-
-//   div.appendChild(document.createTextNode(comic.description));
-
-//   comicDetail.appendChild(title);
-//   comicDetail.appendChild(div);
-// };
-
-// const params = new URLSearchParams(window.location.search);
-
-// console.log(params.get("comicId"));
-
-// const loadComic = async () => {
-//   const response = await fetch(""); // Buscar por id - devuelve un solo comic
-// };
 const search = () => {
-  if (selectType.value == "comics") {
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("type") == "comics") {
+    console.log(selectType.value);
     loadComics();
   }
-  if (selectType.value === "characters") {
+  if (params.get("type") === "characters") {
+    console.log(selectType.value);
     loadCharacters();
+  } else {
+    loadComics();
   }
 };
 
 const inicio = () => {
   search();
   clearResults();
+  hideLoader();
 };
 
 window.onload = inicio;
