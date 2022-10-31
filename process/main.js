@@ -142,16 +142,17 @@ const OrderResults = () => {
     params.set("order", comicOrderBy);
     params.set("type", type);
     window.location.href = window.location.pathname + "?" + params.toString();
+    //   return `${inputSearch.value ? "&" : "?"}orderBy=${selectOrderComics.value}`;
   } else if (type === "characters") {
-    const params = new URLSearchParams(window.location.search);
-
+    // const params = new URLSearchParams(window.location.search);
     params.set("order", characterOrderBy);
     params.set("type", type);
+
     window.location.href = window.location.pathname + "?" + params.toString();
+    //   return `${inputSearch.value ? "&" : "?"}orderBy=${
+    //     selectOrderCharacters.value
+    //   }`;
   }
-  // else {
-  //   return "";
-  // }
 };
 
 //Retorna última parte de la URL-------------------------------------------------------------
@@ -215,7 +216,7 @@ const updateResultsCounter = (count, title) => {
 // };
 
 const fetchComic = async (comicId) => {
-  // showLoader();
+  showLoader();
   const {
     data: {
       results: [comic],
@@ -245,7 +246,7 @@ const fetchComic = async (comicId) => {
 };
 
 const fetchComicCharacters = async (comicId) => {
-  // showLoader();
+  showLoader();
   const {
     data: { results, total },
   } = await fetchUrl(getApiUrl("comics", comicId, "characters"));
@@ -328,43 +329,43 @@ const showCards = () => {
 //   }
 // };
 
-const fetchCharacter = async (characterId) => {
-  // showLoader();
-  const {
-    data: {
-      results: [character],
-    },
-  } = await fetchUrl(getApiUrl("characters", characterId));
-  const coverPath = `${character.thumbnail.path}.${character.thumbnail.extension}`;
-  characterDetails(character.name, coverPath, character.description);
-  hideComicDetail();
-  hideLoader();
-  updatePagination();
-};
+// const fetchCharacter = async (characterId) => {
+//   showLoader();
+//   const {
+//     data: {
+//       results: [character],
+//     },
+//   } = await fetchUrl(getApiUrl("characters", characterId));
+//   const coverPath = `${character.thumbnail.path}.${character.thumbnail.extension}`;
+//   characterDetails(character.name, coverPath, character.description);
+//   hideComicDetail();
+//   hideLoader();
+//   updatePagination();
+// };
 
-const characterDetails = (name, image, description) => {
-  characterImg.src = image;
-  characterName.innerHTML = name;
-  characterDescription.innerHTML = description;
-};
+// const characterDetails = (name, image, description) => {
+//   characterImg.src = image;
+//   characterName.innerHTML = name;
+//   characterDescription.innerHTML = description;
+// };
 
-const showCharacterDetails = () => {
-  characterSection.classList.remove("d-none");
-};
+// const showCharacterDetails = () => {
+//   characterSection.classList.remove("d-none");
+// };
 
-const hideCharacterDetails = () => {
-  characterSection.classList.add("d-none");
-};
+// const hideCharacterDetails = () => {
+//   characterSection.classList.add("d-none");
+// };
 
-const fetchCharacterComics = async (characterId) => {
-  const {
-    data: { results, total },
-  } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
-  printComics(results);
+// const fetchCharacterComics = async (characterId) => {
+//   const {
+//     data: { results, total },
+//   } = await fetchUrl(getApiUrl("characters", characterId, "comics"));
+//   printComics(results);
 
-  updateResultsCounter(total, "Comics");
-  updatePagination();
-};
+//   updateResultsCounter(total, "Comics");
+//   updatePagination();
+// };
 
 const clearResults = () => {
   cardGroup.innerHTML = "";
@@ -379,15 +380,14 @@ let currentPage = 1;
 
 btnSearch.addEventListener("click", () => {
   OrderResults();
+  search();
   // hideComicDetail();
   // hideCharacterDetails();
   clearResults();
   // clearPageCount();
-  search();
+  // search();
   // showCards();
   // updatePaginationCallback(search);
-  // loadComics();
-  // loadCharacters();
 });
 
 //PAGINATOR
@@ -434,8 +434,7 @@ const updatePaginationData = (totalResults) => {
 };
 
 const updatePagination = () => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("offset") === 0) {
+  if (offSet === 0) {
     firstPage.disabled = true;
     previousPage.disabled = true;
   } else {
@@ -443,7 +442,7 @@ const updatePagination = () => {
     previousPage.disabled = false;
   }
 
-  if (params.get("offset") + 20 >= resultsCount) {
+  if (offSet + 20 >= resultsCount) {
     lastPage.disabled = true;
     nextPage.disabled = true;
   } else {
@@ -452,52 +451,23 @@ const updatePagination = () => {
   }
 };
 
-//-------------------------------------------------------------------------------------------------------------------------
-
-// /**
-//  *
-//  */
-// const formSearch = document.getElementById("search-comics");
-
-// formSearch.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   const orderBy = e.target["control-order-by"].value;
-
-//   const params = new URLSearchParams(window.location.search);
-
-//   params.set("order", orderBy);
-//   params.set("offset", 20);
-
-//   window.location.href = window.location.pathname + "?" + params.toString();
-// });
-
-// const loadDetail = (comic) => {
-//   const comicDetail = document.getElementById("comic-detail");
-
-//   comicDetail.classList.remove("d-none");
-
-//   const title = document.createElement("h3");
-//   const text = document.createTextNode(comic.title);
-//   const div = document.createElement("div");
-
-//   title.appendChild(text);
-
-//   div.appendChild(document.createTextNode(comic.description));
-
-//   comicDetail.appendChild(title);
-//   comicDetail.appendChild(div);
+// const inicio = () => {
+//   search();
+//   updatePaginationCallback(search);
+//   getApiUrl();
+//   updatePagination();
 // };
 
-// const params = new URLSearchParams(window.location.search);
+//-------------------------------------------------------------------------------------------------------------------------
 
-// console.log(params.get("comicId"));
+// const getParams = () => {
 
-// const loadComic = async () => {
-//   const response = await fetch(""); // Buscar por id - devuelve un solo comic
+//   return params;
+
 // };
 
 const loadComics = async () => {
+  clearResults();
   const params = new URLSearchParams(window.location.search);
 
   const comicsResponse = await getComics(
@@ -550,21 +520,22 @@ const loadComics = async () => {
 
     cardGroup.appendChild(comicCard);
   });
+  // clearResults();
 };
+
 const loadCharacters = async () => {
   clearResults();
   const params = new URLSearchParams(window.location.search);
 
   const charactersResponse = await getCharacters(
-    params.get("order") || "name",
-    params.get("offset") || 0
+    params.get("offset") || 0,
+    params.get("order") || "name"
   );
 
   const data = charactersResponse.data;
-  // console.log("porque");
 
   const characters = data.results;
-  // console.log(data);
+  console.log(data);
 
   if (characters.length === 0) {
     cardGroup.innerHTML =
@@ -579,43 +550,81 @@ const loadCharacters = async () => {
     characterCard.onclick = () => {
       // fetchCharacter(character.id);
       // showCharacterDetails();
-      // clearResults();
-      clearPageCount();
+      clearResults();
+      // clearPageCount();
       // fetchCharacterComics(character.id);
       // updatePaginationCallback(() => fetchCharacterComics(character.id));
     };
     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
-    <div class="card card-personaje">
-      <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
-      <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
-        <p class="card-text">${character.name}</p>
-      </div>
+  <div class="card card-personaje">
+    <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
+    <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
+      <p class="card-text">${character.name}</p>
     </div>
-  </div> `;
+  </div>
+</div> `;
 
     cardGroup.append(characterCard);
   });
 };
 
+// /**
+//  *
+//  */
+// const formSearch = document.getElementById("search-comics");
+
+// formSearch.addEventListener("submit", (e) => {
+//   e.preventDefault();
+
+//   const orderBy = e.target["control-order-by"].value;
+
+//   const params = new URLSearchParams(window.location.search);
+
+//   params.set("order", orderBy);
+//   params.set("offset", 20);
+
+//   window.location.href = window.location.pathname + "?" + params.toString();
+// });
+
+// const loadDetail = (comic) => {
+//   const comicDetail = document.getElementById("comic-detail");
+
+//   comicDetail.classList.remove("d-none");
+
+//   const title = document.createElement("h3");
+//   const text = document.createTextNode(comic.title);
+//   const div = document.createElement("div");
+
+//   title.appendChild(text);
+
+//   div.appendChild(document.createTextNode(comic.description));
+
+//   comicDetail.appendChild(title);
+//   comicDetail.appendChild(div);
+// };
+
+// const params = new URLSearchParams(window.location.search);
+
+// console.log(params.get("comicId"));
+
+// const loadComic = async () => {
+//   const response = await fetch(""); // Buscar por id - devuelve un solo comic
+// };
 const search = () => {
   const params = new URLSearchParams(window.location.search);
 
   if (params.get("type") == "comics") {
-    console.log(selectType.value);
     loadComics();
   }
   if (params.get("type") === "characters") {
-    console.log(selectType.value);
     loadCharacters();
-  } else {
-    loadComics();
   }
+  // loadComics();
 };
 
 const inicio = () => {
   search();
   clearResults();
-  hideLoader();
 };
 
 window.onload = inicio;

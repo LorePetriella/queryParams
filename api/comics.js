@@ -1,6 +1,6 @@
-const getComics = async (offset, orderBy) => {
+const getComics = async (offset = 0, orderBy) => {
   const response = await fetch(
-    `${baseUrl}comics?orderBy=${orderBy}&apikey=${publicKey}&offset=${offset}`
+    `${baseUrl}comics?orderBy=${orderBy}&offset=${offset}&apikey=${publicKey}`
   );
 
   const data = await response.json();
