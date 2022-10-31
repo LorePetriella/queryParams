@@ -283,52 +283,6 @@ const showCards = () => {
 };
 // CHARACTERS
 
-// const fetchCharacters = async () => {
-//   showLoader();
-//   const {
-//     data: { results, total },
-//   } = await fetchUrl(getApiUrl("characters"));
-//   console.log(results);
-
-//   printCharacters(results);
-//   updateResultsCounter(total, "Resultados");
-//   hideLoader();
-//   updatePagination();
-// };
-
-// const printCharacters = (characters) => {
-//   clearResults();
-//   if (characters.length === 0) {
-//     cardGroup.innerHTML =
-//       '<h2 class="no-length fw-bold fs-5">No hemos encontrado resultados</h2>';
-//   }
-
-//   for (const character of characters) {
-//     const characterCard = document.createElement("div");
-//     characterCard.tabIndex = 0;
-
-//     characterCard.classList.add("comic");
-//     characterCard.onclick = () => {
-//       fetchCharacter(character.id);
-//       showCharacterDetails();
-//       clearResults();
-//       clearPageCount();
-//       fetchCharacterComics(character.id);
-//       updatePaginationCallback(() => fetchCharacterComics(character.id));
-//     };
-//     characterCard.innerHTML = `<div id="box-results" class="d-flex flex-wrap ">
-//   <div class="card card-personaje">
-//     <img src="${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}" class="card-img-top imagen" alt="${character.name}">
-//     <div class="card-body nombre-personaje text-white fw-bold text-uppercase border-top border-danger border-4">
-//       <p class="card-text">${character.name}</p>
-//     </div>
-//   </div>
-// </div> `;
-
-//     cardGroup.append(characterCard);
-//   }
-// };
-
 // const fetchCharacter = async (characterId) => {
 //   showLoader();
 //   const {
@@ -520,7 +474,6 @@ const loadComics = async () => {
 
     cardGroup.appendChild(comicCard);
   });
-  // clearResults();
 };
 
 const loadCharacters = async () => {
@@ -528,8 +481,8 @@ const loadCharacters = async () => {
   const params = new URLSearchParams(window.location.search);
 
   const charactersResponse = await getCharacters(
-    params.get("offset") || 0,
-    params.get("order") || "name"
+    params.get("order") || "name",
+    params.get("offset") || 0
   );
 
   const data = charactersResponse.data;
@@ -568,58 +521,14 @@ const loadCharacters = async () => {
   });
 };
 
-// /**
-//  *
-//  */
-// const formSearch = document.getElementById("search-comics");
-
-// formSearch.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   const orderBy = e.target["control-order-by"].value;
-
-//   const params = new URLSearchParams(window.location.search);
-
-//   params.set("order", orderBy);
-//   params.set("offset", 20);
-
-//   window.location.href = window.location.pathname + "?" + params.toString();
-// });
-
-// const loadDetail = (comic) => {
-//   const comicDetail = document.getElementById("comic-detail");
-
-//   comicDetail.classList.remove("d-none");
-
-//   const title = document.createElement("h3");
-//   const text = document.createTextNode(comic.title);
-//   const div = document.createElement("div");
-
-//   title.appendChild(text);
-
-//   div.appendChild(document.createTextNode(comic.description));
-
-//   comicDetail.appendChild(title);
-//   comicDetail.appendChild(div);
-// };
-
-// const params = new URLSearchParams(window.location.search);
-
-// console.log(params.get("comicId"));
-
-// const loadComic = async () => {
-//   const response = await fetch(""); // Buscar por id - devuelve un solo comic
-// };
 const search = () => {
   const params = new URLSearchParams(window.location.search);
 
-  if (params.get("type") == "comics") {
-    loadComics();
-  }
   if (params.get("type") === "characters") {
     loadCharacters();
+  } else {
+    loadComics();
   }
-  // loadComics();
 };
 
 const inicio = () => {
