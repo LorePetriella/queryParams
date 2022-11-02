@@ -58,92 +58,72 @@
               <h4 class="fw-bold">Búsqueda</h4>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
-              <div class="input-group mb-3 align-self-center">
-                <span
-                  class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
-                  id="basic-addon3"
-                  ><i class="fa-solid fa-magnifying-glass"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control border-0 border-bottom rounded-0 border-2 border-dark fs-5 estilo-focus"
-                  id="input-search"
-                  aria-describedby="input-search"
-                  placeholder="Ingresa tu búsqueda"
-                />
+          <form id="form-search">
+            <div class="row">
+              <div class="col-12 col-lg-6 d-flex flex-row align-items-center">
+                <div class="input-group mb-3 align-self-center">
+                  <span
+                    class="input-group-text border-0 border-bottom rounded-0 border-2 border-dark"
+                    id="basic-addon3"
+                    ><i class="fa-solid fa-magnifying-glass"></i
+                  ></span>
+                  <input
+                    type="text"
+                    class="form-control border-0 border-bottom rounded-0 border-2 border-dark fs-5 estilo-focus"
+                    id="input-search"
+                    aria-describedby="input-search"
+                    placeholder="Ingresa tu búsqueda"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-lg-6">
-              <div class="row d-flex flex-row justify-content-start">
-                <div
-                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho"
-                >
-                  <label
-                    for="select-tipo"
-                    class="fw-bold text-secondary margen-derecho"
-                    >TIPO</label
+              <div class="col-12 col-lg-6">
+                <div class="row d-flex flex-row justify-content-start">
+                  <div
+                    class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center margen-derecho"
                   >
-                  <select
-                    id="select-tipo"
-                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                    <label
+                      for="select-tipo"
+                      class="fw-bold text-secondary margen-derecho"
+                      >TIPO</label
+                    >
+                    <select
+                      id="select-tipo"
+                      class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                    >
+                      <option value="comics">COMICS</option>
+                      <option value="characters">PERSONAJES</option>
+                    </select>
+                  </div>
+                  <div
+                    class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center"
                   >
-                    <option value="comics">COMICS</option>
-                    <option value="characters">PERSONAJES</option>
-                  </select>
-                </div>
-                <div
-                  id="div-select-comics"
-                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center"
-                >
-                  <label
-                    for="select-order-comics"
-                    class="fw-bold text-secondary margen-derecho"
-                    >ORDEN</label
+                    <label
+                      for="select-orderby"
+                      class="fw-bold text-secondary margen-derecho"
+                      >ORDEN</label
+                    >
+                    <select
+                      id="select-orderby"
+                      class="form-select border-0 fw-bold rounded-0 estilo-focus"
+                    ></select>
+                  </div>
+                  <div
+                    class="col-12 col-sm-1 col-lg-1 d-flex flex-row align-items-center box-btn-buscar"
                   >
-                  <select
-                    id="select-order-comics"
-                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
-                  >
-                    <option value="title">A-Z</option>
-                    <option value="-title">Z-A</option>
-                    <option value="-focDate">Más nuevos</option>
-                    <option value="onsaleDate">Más viejos</option>
-                  </select>
-                </div>
-                <div
-                  id="div-select-character"
-                  class="col-12 col-sm-5 col-lg-5 d-flex flex-row align-items-center d-none"
-                >
-                  <label
-                    for="select-order-characters"
-                    class="fw-bold text-secondary margen-derecho"
-                    >ORDEN</label
-                  >
-                  <select
-                    id="select-order-characters"
-                    class="form-select border-0 fw-bold rounded-0 estilo-focus"
-                  >
-                    <option value="name">A-Z</option>
-                    <option value="-name">Z-A</option>
-                  </select>
-                </div>
-                <div
-                  class="col-12 col-sm-1 col-lg-1 d-flex flex-row align-items-center box-btn-buscar"
-                >
-                  <button
-                    id="btn-search"
-                    type="button"
-                    class="btn btn-dark rounded-1 box-btn-buscar"
-                  >
-                    BUSCAR
-                  </button>
+                    <button
+                      id="btn-search"
+                      type="submit"
+                      class="btn btn-dark rounded-1 box-btn-buscar"
+                    >
+                      BUSCAR
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </nav>
+
         <!-- ******************************************
                   SECCIÓN COMICS
     ********************************************* -->
@@ -188,13 +168,13 @@
         <!-- ******************************************
                      LOADER
     ********************************************* -->
-        <!-- <div class="loader-container">
+        <div class="loader-container">
           <img
             src="../assets/icons/Hammer.png"
             class="ld ld-flip-h thor"
             alt=""
           />
-        </div> -->
+        </div>
         <!-- ******************************************
                   PAGINADOR
     ********************************************* -->
