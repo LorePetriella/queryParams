@@ -275,6 +275,7 @@ const loadComics = async () => {
 };
 
 const loadCharacters = async () => {
+  showLoader();
   clearResults();
   const params = new URLSearchParams(window.location.search);
 
@@ -291,6 +292,7 @@ const loadCharacters = async () => {
 
   updateResultsCounter(results, "Resultados");
   updatePagination(results);
+  hideLoader();
 
   if (characters.length === 0) {
     cardGroup.innerHTML =
