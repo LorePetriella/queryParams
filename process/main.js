@@ -48,12 +48,9 @@ const loaderContainer = document.querySelector(".loader-container");
 //FOOTER ELEMENTS
 
 const btnLore = document.getElementById("lore");
-const btnStefa = document.getElementById("stefa");
 const contactLore = document.getElementById("contact-lore");
-const contactStefa = document.getElementById("contact-stefa");
 const loreGithub = document.getElementById("lore-github");
 const loreLinkedin = document.getElementById("lore-linkedin");
-const stefaGithub = document.getElementById("stefa-github");
 
 //FOOTER'S  BUTTONS
 
@@ -64,15 +61,6 @@ btnLore.addEventListener("click", () => {
   loreGithub.classList.remove("text-light");
   loreLinkedin.classList.add("text-danger");
   loreLinkedin.classList.remove("text-light");
-});
-
-btnStefa.addEventListener("click", () => {
-  contactLore.classList.add("d-none");
-  contactStefa.classList.remove("d-none");
-  stefaGithub.classList.add("text-danger");
-  stefaGithub.classList.remove("text-light");
-  stefaLinkedin.classList.add("text-danger");
-  stefaLinkedin.classList.remove("text-light");
 });
 
 //LOADER
@@ -89,9 +77,9 @@ let resultsCount = 0;
 
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  const orderBy = e.target["select-orderby"].value;
   const params = new URLSearchParams(window.location.search);
+  const orderBy = e.target["select-orderby"].value;
+
   const type = e.target["select-tipo"].value;
 
   params.set("order", orderBy);
@@ -103,6 +91,8 @@ searchForm.addEventListener("submit", (e) => {
 
 const createSelect = () => {
   if (selectType.value === "comics") {
+    console.log("estoy en ");
+
     selectOrderBy.innerHTML = `
     <option value="title">A-Z</option>
     <option value="-title">Z-A</option>
@@ -110,6 +100,8 @@ const createSelect = () => {
     <option value="onsaleDate">Más viejos</option>`;
   }
   if (selectType.value === "characters") {
+    console.log("estoy en seleccionado");
+
     selectOrderBy.innerHTML = `
       <option value="name">A-Z</option>
       <option value="-name">Z-A</option>`;
@@ -143,15 +135,10 @@ const clearPageCount = () => {
   currentPage = 1;
 };
 
-btnSearch.addEventListener("click", () => {
-  search();
-
-  clearResults();
-});
-
 //PAGINATION
 let currentPage = 1;
 let page = 1;
+
 const updatePaginationFunction = () => {
   const params = new URLSearchParams(window.location.search);
   const offset = parseInt(params.get("offset")) || 0;
@@ -181,8 +168,7 @@ const updatePaginationFunction = () => {
     currentPage = totalPages;
 
     params.set("offset", offset1);
-    // params.set("cp", currentPage);
-    // params.set("tp", totalPages);
+
     window.location.href = window.location.pathname + "?" + params.toString();
 
     updatePaginationData();
@@ -325,6 +311,7 @@ const search = () => {
 
   if (params.get("type") === "characters") {
     loadCharacters();
+    selectType.value = "characters";
   } else {
     loadComics();
   }
@@ -332,7 +319,7 @@ const search = () => {
 
 const inicio = () => {
   search();
-  // clearResults();
+
   createSelect();
   updatePaginationFunction();
   updatePagination();
